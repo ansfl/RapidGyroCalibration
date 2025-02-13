@@ -10,19 +10,19 @@ Low-cost gyroscope calibration is essential for ensuring the accuracy and reliab
 
 ## Network
 
-%
-Recall that the basic NN approach uses single gyroscope readings as input to output its bias. Following this approach, we used a fixed number of input channels and increased the training data using real and virtual MGs. Given that an IMU consists of three orthogonal gyroscopes, we set the input channels to three. We sought to implement a basic DL principle according to which when increasing the training data the performance of NNs improves until reaching a steady state solution, that is, until additional data no longer influences performance. Therefore, increasing the training data should improve the calibration performance of the gyroscope, up to a steady-state solution (saturation). For example, when training the network with data from three gyroscopes, the minimum training set consists of $3 \cdot M$ samples.  When increasing the training set by an additional $N$ IMUs, the training set consists of $3 \cdot M \cdot N$ samples.  The input channels, however, remain three in those two examples. Figure \ref{fig:raising_train_data}  provides a graphic illustration of our approach and demonstrates how incorporating additional gyroscopes increases the volume of the training data while maintaining the size of the input channels.
-%
-\begin{figure}[!htbp]
-\begin{center}
-\captionsetup{justification=centering}
-\includegraphics[scale=0.4]{raising_train_n_gyro.jpg}
-\caption{Block diagram illustrating our approach for increasing the training data. The upper diagram depicts a setup with three gyroscopes; the lower diagram shows $3\dot N$ gyroscopes. The figure shows the differences in the training data size. N is the number of IMUs, M is the number of samples recorded by each gyroscope, and S is the window size.}
-\label{fig:raising_train_data}
-\end{center}
-\end{figure}
+Recall that the basic NN approach uses single gyroscope readings as input to output its bias. Following this approach, we used a fixed number of input channels and increased the training data using real and virtual MGs. Given that an IMU consists of three orthogonal gyroscopes, we set the input channels to three. We sought to implement a basic DL principle according to which when increasing the training data the performance of NNs improves until reaching a steady state solution, that is, until additional data no longer influences performance. Therefore, increasing the training data should improve the calibration performance of the gyroscope, up to a steady-state solution (saturation). For example, when training the network with data from three gyroscopes, the minimum training set consists of $3 \cdot M$ samples.  When increasing the training set by an additional $N$ IMUs, the training set consists of $3 \cdot M \cdot N$ samples.  The input channels, however, remain three in those two examples. Figure 1 [](#training-data-expansion)  provides a graphic illustration of our approach and demonstrates how incorporating additional gyroscopes increases the volume of the training data while maintaining the size of the input channels. .
 
-%
+![Training Data Expansion](https://github.com/ansfl/RapidGyroCalibration/blob/main/raising_train_n_gyro.jpg)
+
+*Figure 1: Block diagram illustrating our approach for increasing the training data. The upper diagram depicts a setup with three gyroscopes; the lower diagram shows 3N gyroscopes. The figure shows the differences in the training data size. N is the number of IMUs, M is the number of samples recorded by each gyroscope, and S is the window size.*
+
+Our network focus on convolutional neural network architecture, as presented in Figure 2 [](#Network). 
+It consists of a convolution layer followed by a LeakyReLU activation function and a max-pooling layer. Next, two fully connected layers, with a LeakyReLU activation function between them, process the output features.
+
+![Network](https://github.com/ansfl/RapidGyroCalibration/blob/main/Network_illustraion.jpg)
+
+*Figure 2: Our baseline network architecture. The network receives gyroscope measurements and outputs the gyroscope deterministic bias.*
+
 
 ## Dataset
 
