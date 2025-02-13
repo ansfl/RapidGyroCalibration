@@ -1,6 +1,6 @@
 # RapidGyroCalibration
 
-Here, you can find the dataset of the paper <span style="font-family:Arial; font-size:18px;">Rapid Gyroscope Calibration: A Deep Learning Approach </span>
+Here, you can find the dataset, contains only the real recordings, of the paper <span style="font-family:Arial; font-size:18px;">Rapid Gyroscope Calibration: A Deep Learning Approach </span>
 
 ## Abstract
 
