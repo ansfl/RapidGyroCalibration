@@ -63,7 +63,7 @@ For the evaluation process, we divided the real data into four datasets:
   - **Training set**: 6.83 hours  
   - **Testing set**: 0.87 hours (not included in training)  
 
-Table 2 shows the duration of all four real datasets. Overall, the four real datasets contain 76.2 hours of gyroscope measurements from 36 real gyroscopes. 
+Table 2 shows the duration of all four real datasets. Overall, the four real datasets contain 76.2 hours of gyroscope measurements from 36 gyroscopes. 
 
 The table below provides a detailed breakdown of the total training and testing time across selected datasets.
 
