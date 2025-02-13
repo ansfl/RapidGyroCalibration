@@ -44,7 +44,7 @@ To account for potential variations in gyroscope performance due to manufacturin
 
 To achieve an accurate bias estimate from a single recording, a substantial number of samples is necessary to average out the Gaussian mean-zero noise. Consequently, 13,000 samples were recorded for each of the gyroscopes. The bias distribution was estimated by repeating the experiment 100 times. The training dataset should include a variety of bias values to allow generalization. Consequently, we turned off the device and waited 10 seconds before turning it back on. By doing so, we obtained different bias values in each experiment, which contributed to the training process and allowed for generalization.
 
-![Network](https://github.com/ansfl/RapidGyroCalibration/blob/main/experimental_setup.jpg)
+![Network](https://github.com/ansfl/RapidGyroCalibration/blob/main/Figures/experimental_setup.jpg)
 
 *Figure 3: Experimental setup: (right) Movella DOTS IMUs configuration, (left) SparkFun IMUs configuration.*
 
