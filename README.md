@@ -23,8 +23,67 @@ It consists of a convolution layer followed by a LeakyReLU activation function a
 
 *Figure 2: Our baseline network architecture. The network receives gyroscope measurements and outputs the gyroscope deterministic bias.*
 
-
 ## Dataset
+
+We employed four types of gyroscopes for our experiments: (a) Movella Dot , (b) SparkFun , (c) NG-IMU  and (d) Memsense MS-IMU3025. The specifications for these gyroscopes, as provided by the manufacturers, are shown  in Table 1.
+
+### Specifications of the Gyroscopes
+
+| **Sensor Name**  | **Sample Rate [Hz]** | **Noise Density [mdps/√Hz]** | **Bias Stability [°/h]** |
+|-----------------|---------------------|----------------------------|-------------------------|
+| Movella DOT    | 120                 | 7                          | 10                      |
+| SparkFun       | 130-145             | 3.8                        | N/A                     |
+| NG             | 200                 | N/A                        | N/A                     |
+| Memsense       | 250                 | 14.8                        | 2.6                     |
+
+*Table 1: Specifications of the gyroscopes, as provided by the manufacturers.*
+
+We used four Movella DOTs and four SparkFun IMUs in our experiments. After evaluating our approach on those devices, we further tested our approach on the NG and Memsense IMUs to evaluate its generalization. During data acquisition, all 12 IMUs from each brand were placed on a stable table to minimize external disturbances.
+For synchronization, different methods were applied based on sensor type. Movella DOT sensors were synchronized using built-in Bluetooth functionality, allowing simultaneous activation and recording via a mobile application. For SparkFun, NG, and Memsense IMUs, which do not have built-in synchronization, we designed and 3D-printed custom placeholders to keep the sensors in a fixed position and connected them to a single power hub. A centralized data acquisition script, controlled by Arduino, was implemented to trigger data logging simultaneously across all connected sensors, ensuring time alignment of the recorded gyroscope readings.
+To account for potential variations in gyroscope performance due to manufacturing inconsistencies, we conducted experiments using multiple units of each IMU type. Despite being from the same manufacturer, individual sensors exhibited slight differences in bias and noise characteristics. By including multiple sensors in our dataset and evaluating performance across different models, we ensured that our approach remains robust to these variations.
+
+To achieve an accurate bias estimate from a single recording, a substantial number of samples is necessary to average out the Gaussian mean-zero noise. Consequently, 13,000 samples were recorded for each of the gyroscopes. The bias distribution was estimated by repeating the experiment 100 times. The training dataset should include a variety of bias values to allow generalization. Consequently, we turned off the device and waited 10 seconds before turning it back on. By doing so, we obtained different bias values in each experiment, which contributed to the training process and allowed for generalization.
+
+![Network](https://github.com/ansfl/RapidGyroCalibration/blob/main/experimental_setup.jpg)
+
+*Figure 3: Experimental setup: (right) Movella DOTS IMUs configuration, (left) SparkFun IMUs configuration.*
+
+For the evaluation process, we divided the real data into four datasets:
+- **Dataset-1**:  
+  Contains recorded data from all 12 SparkFun gyroscopes across 100 recordings, each with 13,000 measurements corresponding to 87 seconds of recording time per session.  
+  - **Training set**: 23.2 hours of recording  
+  - **Testing set**: 1.45 hours of recording (not present in training)  
+
+- **Dataset-2**:  
+  Includes data from all 12 DOT gyroscopes across 400 recordings, each with 13,000 measurements corresponding to 120 seconds of recording time per session.  
+  - **Training set**: 32 hours of recording  
+  - **Testing set**: 2 hours of recording (not present in training)  
+
+- **Dataset-3**:  
+  The dataset contains 100 recordings of each of the 6 NG gyroscopes. Each recording consists of 13,000 measurements lasting 65 seconds.  
+  - **Training set**: 8.67 hours  
+  - **Testing set**: 1.08 hours (not included in training)  
+
+- **Dataset-4**:  
+  The dataset contains 100 recordings of each of the 6 Memsense gyroscopes. Each recording consists of 13,000 measurements lasting 52 seconds.  
+  - **Training set**: 6.83 hours  
+  - **Testing set**: 0.87 hours (not included in training)  
+Table 2 shows the duration of all \hlc{six} datasets. Overall, the {six} datasets contain \hlc{186.6} hours of gyroscope measurements from \hlc{36} real gyroscopes and 48 virtual ones. \\
+
+The table below provides a detailed breakdown of the total training and testing time across selected datasets.
+
+| Dataset | Train [hours] | Test [hours] | Total [hours] |
+|---------|-------------|------------|--------------|
+| 1       | 23.2       | 1.45       | 24.65        |
+| 2       | 32         | 2          | 34           |
+| 3       | 8.67       | 1.08       | 9.75         |
+| 4       | 6.93       | 0.87       | 7.8          |
+
+*Table 2: Detailed description of the total training and testing time across all datasets.*
+
+
+
+
 
 ## Citation   
 
