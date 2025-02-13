@@ -68,7 +68,8 @@ For the evaluation process, we divided the real data into four datasets:
   The dataset contains 100 recordings of each of the 6 Memsense gyroscopes. Each recording consists of 13,000 measurements lasting 52 seconds.  
   - **Training set**: 6.83 hours  
   - **Testing set**: 0.87 hours (not included in training)  
-Table 2 shows the duration of all \hlc{six} datasets. Overall, the {six} datasets contain \hlc{186.6} hours of gyroscope measurements from \hlc{36} real gyroscopes and 48 virtual ones. \\
+
+Table 2 shows the duration of all four real datasets. Overall, the four real datasets contain 76.2 hours of gyroscope measurements from 36 real gyroscopes. \\
 
 The table below provides a detailed breakdown of the total training and testing time across selected datasets.
 
